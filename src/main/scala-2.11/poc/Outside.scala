@@ -16,4 +16,10 @@ object Outside extends App with Config with ProducerSettings {
     }
     args(0).toInt
   }
+
+  Source(1 to numberOfMessages)
+    .map(_.toString)
+    .map(asTransformedProducerRecord[Array[Byte]](Incoming))
+    .to(Producer.plainSink(producerSettings))
+    .run()
 }
