@@ -16,4 +16,12 @@ package object poc {
       msg.committableOffset
     )
   }
+
+  def asTransformedProducerRecord[A](topic: String)(msg: String) = {
+    new ProducerRecord[A, String](topic, transform(topic, msg))
+  }
+
+  def transform(label: String, msg: String) = {
+    s"$label: ${LocalDateTime.now().toString}, $msg"
+  }
 }
