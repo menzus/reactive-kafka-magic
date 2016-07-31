@@ -12,5 +12,10 @@ object Verifier extends App with Config with ConsumerSettings with ProducerSetti
   implicit val system = ActorSystem("verifier-actor-system")
   implicit val materializer = ActorMaterializer()
 
+  Consumer.committableSource(consumerSettings("verifier-client"), Subscriptions.topics(Unverified))
+    .map(asTransformedProducerMessage(Verified))
+    .to(Producer.commitableSink(producerSettings))
+    .run()
+
   def isVerified(msg: String): Boolean = Random.nextBoolean()
 }
