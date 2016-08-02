@@ -6,7 +6,7 @@ import org.apache.kafka.clients.producer.ProducerRecord
 
 package object poc {
 
-  val Approved = "approved-4"
+  val Approved = "approved"
   val Incoming = "incoming-4"
   val Verified = "verified-4"
   val Unverified = "unverified-4"
