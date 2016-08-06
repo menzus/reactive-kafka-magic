@@ -8,7 +8,7 @@ package object poc {
 
   val Approved = "approved"
   val Incoming = "incoming"
-  val Verified = "verified-4"
+  val Verified = "verified"
   val Unverified = "unverified-4"
 
   def asTransformedProducerMessage[A](topic: String)(msg: CommittableMessage[A, String]) = {
