@@ -24,7 +24,6 @@ object Filter extends App with Config with ConsumerSettings with ProducerSetting
       msg.committableOffset.commitScaladsl
       ByteString.fromString(msg.value + "\n")
     }
-    .to(FileIO.toPath(Paths.get("/tmp/filter/verified.txt"), Set(StandardOpenOption.APPEND)))
     .run()
 }
 
