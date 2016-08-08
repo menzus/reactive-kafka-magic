@@ -11,6 +11,7 @@ object Filter extends App with Config with ConsumerSettings with ProducerSetting
   implicit val materializer = ActorMaterializer()
 
   Consumer.committableSource(consumerSettings("filter-client"), Subscriptions.topics(Incoming))
+    .map(asTransformedProducerMessage(Unverified))
     .to(Producer.commitableSink(producerSettings))
     .run()
 }
