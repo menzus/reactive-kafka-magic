@@ -17,5 +17,7 @@ object Filter extends App with Config with ConsumerSettings with ProducerSetting
 
   Consumer.committableSource(consumerSettings("filter-client"), Subscriptions.topics(Verified))
     .map(asTransformedProducerMessage(Approved))
+    .to(Producer.commitableSink(producerSettings))
+    .run()
 }
 
